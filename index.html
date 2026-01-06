@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Grid Assignment Replica</title>
+  <style>
+    :root{
+      --pink-bg-1:#f6a8be;
+      --pink-bg-2:#f8b7c9;
+      --grid-border:#ff5fa8;
+      --cell-bg:#070707;
+      --cell-text:#ffffff;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:#ffffff;
+      color:#111;
+    }
+
+    /* Keep overall proportions close to the given screenshot */
+    .page{
+      width:540px;              /* matches the provided image width closely */
+      margin:0 auto;
+      padding:0;
+    }
+
+    /* Top login strip */
+    .login-strip{
+      height:235px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(90deg, var(--pink-bg-2), var(--pink-bg-1));
+      padding:22px 18px;
+    }
+    .login-card{
+      width:270px;
+      background:#ffffff;
+      border-radius:2px;
+      padding:16px 18px 14px;
+      box-shadow:0 1px 0 rgba(0,0,0,0.10);
+      border:1px solid rgba(0,0,0,0.08);
+    }
+    .login-card h2{
+      margin:0 0 10px;
+      text-align:center;
+      font-size:16px;
+      font-weight:700;
+    }
+    .login-card label{
+      display:block;
+      margin:8px 0 4px;
+      font-size:11px;
+      font-weight:700;
+      color:#222;
+    }
+    .login-card input{
+      width:100%;
+      height:24px;
+      border:1px solid #d9d9d9;
+      border-radius:2px;
+      padding:0 8px;
+      font-size:11px;
+      outline:none;
+    }
+    .login-card button{
+      width:100%;
+      height:26px;
+      margin-top:10px;
+      border:0;
+      border-radius:2px;
+      background:#1e88e5;
+      color:#fff;
+      font-size:12px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .login-card a{
+      display:block;
+      text-align:center;
+      margin-top:7px;
+      font-size:10px;
+      color:#4d86c7;
+      text-decoration:none;
+    }
+
+    /* Bottom layouts area */
+    .layouts{
+      padding:18px 22px 16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap:58px;
+      row-gap:34px;
+      align-items:start;
+    }
+
+    .grid{
+      display:grid;
+      background:transparent;
+    }
+    .cell{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--cell-bg);
+      border:3px solid var(--grid-border);
+      color:var(--cell-text);
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size:20px;
+      line-height:1;
+      user-select:none;
+    }
+
+    /* GRID A (top-left) */
+    .grid-a{
+      --u:38px; /* small unit (close to the smaller squares in the image) */
+      grid-template-columns: repeat(4, var(--u));
+      grid-template-rows: repeat(4, var(--u));
+    }
+    .grid-a .c1{ grid-column:1 / span 3; grid-row:1 / span 2; }
+    .grid-a .c2{ grid-column:4 / span 1; grid-row:1 / span 3; }
+    .grid-a .c3{ grid-column:1; grid-row:3; }
+    .grid-a .c4{ grid-column:2; grid-row:3; }
+    .grid-a .c5{ grid-column:3; grid-row:3; }
+    .grid-a .c6{ grid-column:1; grid-row:4; }
+    .grid-a .c7{ grid-column:2; grid-row:4; }
+    .grid-a .c8{ grid-column:3; grid-row:4; }
+    .grid-a .c9{ grid-column:4; grid-row:4; }
+
+    /* GRID B (top-right) */
+    .grid-b{
+      --u:54px; /* medium unit (close to the bigger squares in the image) */
+      grid-template-columns: repeat(4, var(--u));
+      grid-template-rows: repeat(3, var(--u));
+    }
+    .grid-b .c1{ grid-column:1 / span 3; grid-row:1; }
+    .grid-b .c2{ grid-column:4; grid-row:1; }
+    .grid-b .c3{ grid-column:1; grid-row:2; }
+    .grid-b .c4{ grid-column:2; grid-row:2; }
+    .grid-b .c5{ grid-column:3; grid-row:2; }
+    .grid-b .c6{ grid-column:4; grid-row:2; }
+    .grid-b .c7{ grid-column:1; grid-row:3; }
+    .grid-b .c8{ grid-column:2; grid-row:3; }
+    .grid-b .c9{ grid-column:3; grid-row:3; }
+
+    /* GRID C (bottom-left) */
+    .grid-c{
+      --u:54px;
+      grid-template-columns: repeat(4, var(--u));
+      grid-template-rows: repeat(3, var(--u));
+      grid-column:1; /* keep it under the left grid like the screenshot */
+    }
+    .grid-c .c1{ grid-column:1 / span 3; grid-row:1; }
+    .grid-c .c2{ grid-column:4; grid-row:1 / span 2; }
+    .grid-c .c3{ grid-column:1; grid-row:2; }
+    .grid-c .c4{ grid-column:2; grid-row:2; }
+    .grid-c .c5{ grid-column:3; grid-row:2; }
+    .grid-c .c6{ grid-column:1; grid-row:3; }
+    .grid-c .c7{ grid-column:2; grid-row:3; }
+    .grid-c .c8{ grid-column:3; grid-row:3; }
+    .grid-c .c9{ grid-column:4; grid-row:3; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <section class="login-strip">
+      <div class="login-card">
+        <h2>Login</h2>
+
+        <label>Username</label>
+        <input type="text" placeholder="Enter your username" />
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" />
+
+        <button type="button">Login</button>
+        <a href="#">Forgot Password?</a>
+      </div>
+    </section>
+
+    <section class="layouts">
+      <!-- Grid A -->
+      <div class="grid grid-a">
+        <div class="cell c1">1</div>
+        <div class="cell c2">2</div>
+        <div class="cell c3">3</div>
+        <div class="cell c4">4</div>
+        <div class="cell c5">5</div>
+        <div class="cell c6">6</div>
+        <div class="cell c7">7</div>
+        <div class="cell c8">8</div>
+        <div class="cell c9">9</div>
+      </div>
+
+      <!-- Grid B -->
+      <div class="grid grid-b">
+        <div class="cell c1">1</div>
+        <div class="cell c2">2</div>
+        <div class="cell c3">3</div>
+        <div class="cell c4">4</div>
+        <div class="cell c5">5</div>
+        <div class="cell c6">6</div>
+        <div class="cell c7">7</div>
+        <div class="cell c8">8</div>
+        <div class="cell c9">9</div>
+      </div>
+
+      <!-- Grid C -->
+      <div class="grid grid-c">
+        <div class="cell c1">1</div>
+        <div class="cell c2">2</div>
+        <div class="cell c3">3</div>
+        <div class="cell c4">4</div>
+        <div class="cell c5">5</div>
+        <div class="cell c6">6</div>
+        <div class="cell c7">7</div>
+        <div class="cell c8">8</div>
+        <div class="cell c9">9</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
